@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./"></script>
+    <style>
+        body{
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f8f8;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+     <span>{{emoji}}</span>
+     <h1>{{status_code}}</h1>
+     <p v-if="status_code === 500">Status Code is 500</p>
+     <p v-else-if="status_code > 503">Status Code is Higher than 503!</p>
+     <p v-else-if="status_code > 500">Status Code is Higher than 500!</p>
+     <p v-else>Status Code is Lower than 500</p>
+
+     
+
+     <p>{{status_message}}</p>
+     <button @click="Increase">Increase Status Code</button>
+    </div>
+</body>
+<script>
+    const {createApp, ref} = Vue 
+    createApp({
+        setup(){
+            const emoji = ref("😊");
+            const status_code = ref(498)
+            const status_message = ref("Server is Sleeping")
+
+            const Increase = ()=>{
+                status_code.value++;
+            }
+
+            return {emoji,status_code, status_message,Increase}
+        }
+    }).mount("#app")
+
+</script>
+</html>
